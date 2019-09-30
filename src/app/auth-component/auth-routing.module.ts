@@ -1,21 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {AuthComponentComponent} from './auth-component.component';
 import {AuthLoginComponent} from './auth-login/auth-login.component';
-import {AuthRegisterComponent} from './auth-register/auth-register.component';
-import {AuthSocialComponent} from './auth-social/auth-social.component';
+import {ProfileUserComponent} from './profile-user/profile-user.component';
 
 export const RoutingComponents = [
     AuthLoginComponent,
-    AuthRegisterComponent,
-    AuthSocialComponent
+    ProfileUserComponent
 ];
 
 const routes: Routes = [
     {path: 'login', component: AuthLoginComponent},
-    {path: 'register', component: AuthRegisterComponent},
-    {path: 'socialize/:status/:token/:password/:email/:id/:type', component: AuthSocialComponent},
-    {path: 'socialize/:status/:message_error', component: AuthSocialComponent}
+    {path: 'profile', component: ProfileUserComponent},
 ];
 
 @NgModule({

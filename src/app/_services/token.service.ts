@@ -1,31 +1,15 @@
-const tokenKey = 'auth_token';
-const idKey = 'auth_id';
-
+const TOKEN_KEY = 'auth_token';
 
 export class TokenService {
     static getToken(): string {
-        return window.localStorage[tokenKey];
+        return window.localStorage[TOKEN_KEY];
     }
 
     static saveToken(token: string) {
-        window.localStorage[tokenKey] = token;
+        window.localStorage[TOKEN_KEY] = token;
     }
 
     static destroyToken(): void {
-        window.localStorage.removeItem(tokenKey);
-    }
-}
-
-export class IdentifikatorService {
-    static getAuthId(): number {
-        return window.localStorage[idKey];
-    }
-
-    static saveAuthId(id: number) {
-        window.localStorage[idKey] = id;
-    }
-
-    static destroyAuthId(): void {
-        window.localStorage.removeItem(idKey);
+        window.localStorage.removeItem(TOKEN_KEY);
     }
 }

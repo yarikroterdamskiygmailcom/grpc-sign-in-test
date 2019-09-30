@@ -5,16 +5,15 @@ import { AuthService} from '../_services/auth.service';
 import { AuthComponentComponent} from './auth-component.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule, MatDialogModule, MatFormFieldModule} from '@angular/material';
-import { SocialModalComponent } from '../common/modal/social-modal/social-modal.component';
+import { HttpClientModule } from '@angular/common/http';
+import {MatModule} from './mat.module';
 
 
 @NgModule({
   declarations: [
       AuthComponentComponent,
-      RoutingComponents,
-      SocialModalComponent
+      RoutingComponents
   ],
-    exports: [ SocialModalComponent ],
   imports: [
       FormsModule,
       BrowserModule,
@@ -22,13 +21,12 @@ import { SocialModalComponent } from '../common/modal/social-modal/social-modal.
       ReactiveFormsModule,
       MatButtonModule,
       MatFormFieldModule,
-      MatDialogModule
+      MatDialogModule,
+      HttpClientModule,
+      MatModule
   ],
-    entryComponents: [
-        SocialModalComponent
-    ],
   providers: [
-      AuthService,
+      AuthService
   ],
 })
 export class AuthModule { }

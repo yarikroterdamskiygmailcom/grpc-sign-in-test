@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthLogin} from '../../_services/interface';
+
 import {FormBuilder, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from '../../_services/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ToastService} from '../../_services/ToastService';
-import {IdentifikatorService, TokenService} from '../../_services/token.service';
+
+
 @Component({
     selector: 'app-auth-login',
     templateUrl: './auth-login.component.html',
@@ -18,39 +18,45 @@ export class AuthLoginComponent implements OnInit {
     };
     user: any = this.fb.group({
         password: [],
-        email:    []
+        email: []
     });
     err = false;
+
     constructor(
-        private http:             HttpClient,
-        private auth_service:     AuthService,
-        private active_route:     ActivatedRoute,
-        private fb:               FormBuilder,
-        private messsage_service: ToastService,
-        private router:           Router
+        private http: HttpClient,
+        private auth_service: AuthService,
+        private active_route: ActivatedRoute,
+        private fb: FormBuilder,
+        private router: Router
     ) {
     }
-    ngOnInit() {}
-    login() {
-        this.errors(this.user.value);
-        if (this.user.valid) {
-            this.auth_service.login(this.user.value)
-                .subscribe(
-                    (next: AuthLogin) => {
-                        this.messsage_service.AddMessage('you are logged in', 'success');
-                        TokenService.saveToken(next.token);
-                        IdentifikatorService.saveAuthId(next.user_id);
-                        this.router.navigate([`profile/${next.user_id}`]);
-                    },
-                    (err: any) => {
-                        this.messsage_service.AddMessage(
-                            'Invalid password or email',
-                            'danger');
-                        this.err = true;
-                    }
-                );
-        }
+
+    ngOnInit() {
+        this.auth_service.isAutorize();
     }
+
+    login() {
+        this.auth_service.loginWithFirebase();
+        // this.errors(this.user.value);
+        // if (this.user.valid) {
+        //     this.auth_service.login(this.user.value)
+        //         .subscribe(
+        //             (next: AuthLogin) => {
+        //                 this.messsage_service.AddMessage('you are logged in', 'success');
+        //                 TokenService.saveToken(next.token);
+        //                 IdentifikatorService.saveAuthId(next.user_id);
+        //                 this.router.navigate([`profile/${next.user_id}`]);
+        //             },
+        //             (err: any) => {
+        //                 this.messsage_service.AddMessage(
+        //                     'Invalid password or email',
+        //                     'danger');
+        //                 this.err = true;
+        //             }
+        //         );
+        // }
+    }
+
     errors(value: any) {
         this.user = this.fb.group({
             password: ['', Validators.required],
