@@ -25,47 +25,14 @@ export class AuthLoginComponent implements OnInit {
     constructor(
         private http: HttpClient,
         private auth_service: AuthService,
-        private active_route: ActivatedRoute,
         private fb: FormBuilder,
         private router: Router
     ) {
     }
 
     ngOnInit() {
-        this.auth_service.isAutorize();
+        this.auth_service.isCheck();
     }
 
-    login() {
-        this.auth_service.loginWithFirebase();
-        // this.errors(this.user.value);
-        // if (this.user.valid) {
-        //     this.auth_service.login(this.user.value)
-        //         .subscribe(
-        //             (next: AuthLogin) => {
-        //                 this.messsage_service.AddMessage('you are logged in', 'success');
-        //                 TokenService.saveToken(next.token);
-        //                 IdentifikatorService.saveAuthId(next.user_id);
-        //                 this.router.navigate([`profile/${next.user_id}`]);
-        //             },
-        //             (err: any) => {
-        //                 this.messsage_service.AddMessage(
-        //                     'Invalid password or email',
-        //                     'danger');
-        //                 this.err = true;
-        //             }
-        //         );
-        // }
-    }
-
-    errors(value: any) {
-        this.user = this.fb.group({
-            password: ['', Validators.required],
-            email: ['', [Validators.required, Validators.email]]
-        });
-        this.user.setValue({
-            password: value.password,
-            email: value.email
-        });
-    }
 
 }

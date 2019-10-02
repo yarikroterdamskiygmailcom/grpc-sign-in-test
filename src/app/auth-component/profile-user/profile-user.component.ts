@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../_services/auth.service';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'app-profile-user',
@@ -8,15 +9,21 @@ import {AuthService} from '../../_services/auth.service';
 })
 export class ProfileUserComponent implements OnInit {
   profile: any;
+  private history = [];
   constructor(
-      private auth: AuthService,
+      private auth_service: AuthService,
+      private router: Router
 
   ) {
-      this.profile = this.auth.getProfile();
+      this.profile = this.auth_service.getProfile();
   }
 
   ngOnInit() {
-      this.auth.isAutorize();
+      this.auth_service.Initialize(
+          this.auth_service
+              .isCheck
+              .bind(this.auth_service)
+      );
   }
 
 }

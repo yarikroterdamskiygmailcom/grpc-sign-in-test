@@ -12,7 +12,8 @@ export const environment = {
     storageBucket: "backend-d70da.appspot.com",
     messagingSenderId: "739011999933",
     appId: "1:739011999933:web:1f0abefea527d685"
-  }
+  },
+  host: 'https://webapi.freeje.org'
 };
 
 /*
